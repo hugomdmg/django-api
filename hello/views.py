@@ -1,6 +1,24 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .db import countries
+
+def hello_world(request):
+    return JsonResponse({"message": "Hello, World!"})
+
+def get_countries(request):
+    countries_name = []
+    for country in countries:
+        countries_name.append(country["country"])
+    return JsonResponse({"data":countries_name})
+
+@csrf_exempt
+def post_country_population(request):
+    data = json.loads(request.body)
+    for country in countries:
+        if country['country'] == data.get('country', ''):
+            return JsonResponse({"data":country["population"]})
+    return JsonResponse({"data":""})
 
 @csrf_exempt
 def post_data(request):
@@ -22,6 +40,3 @@ def post_data(request):
     else:
         return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
 
-
-def hello_world(request):
-    return JsonResponse({"message": "Hello, World!"})
