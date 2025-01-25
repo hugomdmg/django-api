@@ -1,17 +1,19 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$rm0%(^x8&1@31yjjqi@qra$734y*_ab!v#g1@)syr9x4e^b35'
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+#ALLOWED_HOSTS = ['django-api-omega.vercel.app', 'django-api-omega.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ROOT_URLCONF = 'hello.urls'
 
 
@@ -50,12 +52,12 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'hello.wsgi.application'
+WSGI_APPLICATION = 'hello.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.dummy',
+        'NAME': 'not_used',
     }
 }
 

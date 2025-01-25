@@ -1,23 +1,16 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "hello/asgi.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "staticfiles/**/*",
-            "use": "@vercel/static"
-        }
+      {
+        "src": "hello/asgi.py",
+        "use": "@vercel/python"
+      }
     ],
     "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "/staticfiles/$1"
-        },
-        {
-            "src": "(.*)",
-            "dest": "hello/asgi.py"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "hello/asgi.py"
+      }
     ]
-}
+  }
+  
